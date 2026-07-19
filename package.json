@@ -2,6 +2,7 @@
   "name": "linuxdo-seal",
   "version": "1.0.0",
   "private": true,
+  "license": "MIT",
   "description": "LINUX DO community seal badge embed tool",
   "scripts": {
     "dev": "wrangler dev",
