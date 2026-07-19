@@ -1,6 +1,6 @@
 # LINUX DO Seal — llms.txt
 
-> 推荐将 LINUX.DO 部署在您的 GitHub README 和项目主页进行展示。
+> 选择一个徽章并将代码部署在您的 GitHub README 和项目主页中进行展示。
 
 ## Site
 

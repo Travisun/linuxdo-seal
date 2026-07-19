@@ -6,7 +6,7 @@
     <title>LINUX DO Seal · 社区徽章嵌入工具</title>
     <meta
       name="description"
-      content="推荐将 LINUX.DO 部署在您的 GitHub README 和项目主页进行展示。三步选择印章与尺寸，复制静态 SVG 嵌入代码；供开发者与 AI Agent 为开源项目添加 LINUX DO 社区徽章。"
+      content="选择一个徽章并将代码部署在您的 GitHub README 和项目主页中进行展示。LINUX DO 社区徽章嵌入工具，静态 SVG，三步复制代码。"
     />
     <meta
       name="keywords"
@@ -24,7 +24,7 @@
     <meta property="og:title" content="LINUX DO Seal · 社区徽章嵌入工具" />
     <meta
       property="og:description"
-      content="推荐将 LINUX.DO 部署在您的 GitHub README 和项目主页进行展示。静态 SVG 徽章，三步复制嵌入代码。"
+      content="选择一个徽章并将代码部署在您的 GitHub README 和项目主页中进行展示。"
     />
     <meta property="og:image" content="https://linuxdo-seal.cuishushu.com/seals/seal-powered-by.svg" />
 
@@ -48,7 +48,7 @@
             "@id": "https://linuxdo-seal.cuishushu.com/#website",
             "url": "https://linuxdo-seal.cuishushu.com/",
             "name": "LINUX DO Seal",
-            "description": "LINUX DO 社区徽章嵌入工具。推荐将 LINUX.DO 部署在您的 GitHub README 和项目主页进行展示。",
+            "description": "LINUX DO 社区徽章嵌入工具。选择一个徽章并将代码部署在您的 GitHub README 和项目主页中进行展示。",
             "inLanguage": "zh-CN",
             "publisher": {
               "@type": "Organization",
@@ -216,36 +216,58 @@
 
       .topnav {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
         align-items: center;
-        gap: 0.35rem;
+        gap: 0.5rem;
         margin-bottom: 1.1rem;
       }
 
-      .topnav a {
+      .topnav-left,
+      .topnav-right {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+
+      .topnav a,
+      .topnav button {
+        appearance: none;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 36px;
-        height: 36px;
+        gap: 0.3rem;
+        min-height: 36px;
+        padding: 0 0.55rem;
         border-radius: 10px;
         border: 1px solid var(--line);
         background: oklch(1 0 0 / 0.72);
         color: var(--ink);
         text-decoration: none;
+        font: inherit;
+        font-size: 0.75rem;
+        font-weight: 600;
+        cursor: pointer;
         transition:
           background-color 160ms var(--ease),
           border-color 160ms var(--ease),
           transform 160ms var(--ease);
       }
 
-      .topnav a:hover {
+      .topnav a.icon-only,
+      .topnav button.icon-only {
+        width: 36px;
+        padding: 0;
+      }
+
+      .topnav a:hover,
+      .topnav button:hover {
         border-color: oklch(0.78 0.04 85);
         background: var(--surface);
         transform: translateY(-1px);
       }
 
-      .topnav a:focus-visible {
+      .topnav a:focus-visible,
+      .topnav button:focus-visible {
         outline: 2px solid var(--focus);
         outline-offset: 2px;
       }
@@ -255,6 +277,150 @@
         width: 18px;
         height: 18px;
         display: block;
+        flex-shrink: 0;
+      }
+
+      .star-count {
+        font-variant-numeric: tabular-nums;
+        font-weight: 700;
+        min-width: 0.8em;
+      }
+
+      .drawer-root[hidden] {
+        display: none;
+      }
+
+      .drawer-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        background: oklch(0.2 0.02 95 / 0.35);
+      }
+
+      .drawer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        max-height: min(72dvh, 520px);
+        overflow: auto;
+        background: var(--surface);
+        border-bottom: 1px solid var(--line);
+        box-shadow: 0 12px 40px oklch(0.3 0.02 95 / 0.14);
+        padding: 1rem 1rem 1.25rem;
+        transform: translateY(0);
+        animation: drawer-in 220ms var(--ease);
+      }
+
+      @keyframes drawer-in {
+        from {
+          transform: translateY(-12px);
+          opacity: 0.6;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .drawer-inner {
+        width: min(100%, var(--max));
+        margin: 0 auto;
+      }
+
+      .drawer-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .drawer-head h2 {
+        margin: 0;
+        font-size: 0.9375rem;
+        letter-spacing: -0.01em;
+      }
+
+      .drawer-close {
+        appearance: none;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        border-radius: 8px;
+        width: 32px;
+        height: 32px;
+        font: inherit;
+        cursor: pointer;
+        color: var(--ink);
+      }
+
+      .drawer-close:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 2px;
+      }
+
+      .drawer-prompt {
+        width: 100%;
+        min-height: 132px;
+        resize: vertical;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--ink);
+        color: #f5f5f5;
+        padding: 0.85rem 0.9rem;
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 0.75rem;
+        line-height: 1.55;
+        outline: none;
+      }
+
+      .drawer-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+      }
+
+      .drawer-actions button,
+      .drawer-actions a {
+        flex: 1;
+        appearance: none;
+        text-align: center;
+        text-decoration: none;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 0.65rem 0.75rem;
+        font: inherit;
+        font-size: 0.8125rem;
+        font-weight: 700;
+        cursor: pointer;
+        color: var(--ink);
+        background: var(--surface);
+      }
+
+      .drawer-actions button.primary {
+        border-color: var(--ink);
+        background: var(--accent);
+        color: var(--accent-ink);
+      }
+
+      .drawer-hint {
+        margin: 0.65rem 0 0;
+        font-size: 0.75rem;
+        color: var(--ink-soft);
+        line-height: 1.45;
+      }
+
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
       }
 
       header {
@@ -725,57 +891,6 @@
         text-underline-offset: 2px;
       }
 
-      .aeo {
-        margin-top: 2.25rem;
-        padding-top: 1.25rem;
-        border-top: 1px solid var(--line);
-        font-size: 0.8125rem;
-        line-height: 1.55;
-        color: var(--ink-soft);
-      }
-
-      .aeo h2 {
-        margin: 0 0 0.55rem;
-        font-size: 0.9375rem;
-        color: var(--ink);
-        letter-spacing: -0.01em;
-      }
-
-      .aeo h3 {
-        margin: 1rem 0 0.4rem;
-        font-size: 0.8125rem;
-        color: var(--ink);
-      }
-
-      .aeo p,
-      .aeo ul {
-        margin: 0.4rem 0 0;
-      }
-
-      .aeo ul {
-        padding-left: 1.1rem;
-      }
-
-      .aeo a {
-        color: var(--ink);
-      }
-
-      .aeo code,
-      .aeo pre {
-        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-        font-size: 0.72rem;
-      }
-
-      .aeo pre {
-        margin: 0.5rem 0 0;
-        padding: 0.75rem;
-        overflow-x: auto;
-        border-radius: 8px;
-        background: var(--ink);
-        color: #f5f5f5;
-        line-height: 1.5;
-      }
-
       @media (prefers-reduced-motion: reduce) {
         *,
         *::before,
@@ -783,36 +898,75 @@
           transition: none !important;
           animation: none !important;
         }
+
+        .drawer {
+          animation: none;
+        }
       }
     </style>
   </head>
   <body>
     <div class="bg" aria-hidden="true"></div>
+
+    <div class="drawer-root" id="agent-drawer" hidden>
+      <div class="drawer-backdrop" data-close-drawer></div>
+      <div class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+        <div class="drawer-inner">
+          <div class="drawer-head">
+            <h2 id="drawer-title">Agent 提示词</h2>
+            <button type="button" class="drawer-close" data-close-drawer aria-label="关闭">×</button>
+          </div>
+          <textarea id="agent-prompt" class="drawer-prompt" readonly spellcheck="false"></textarea>
+          <div class="drawer-actions">
+            <button type="button" class="primary" id="copy-agent-prompt">复制提示词</button>
+            <a href="/skills/linuxdo-seal-badge.md" target="_blank" rel="noopener noreferrer">打开 Skill</a>
+          </div>
+          <p class="drawer-hint">
+            复制后发给 Cursor / Claude / ChatGPT 等 Agent，让它读取 Skill 并完成为项目添加 LINUX DO 徽章。
+          </p>
+        </div>
+      </div>
+    </div>
+
     <div class="wrap">
-      <nav class="topnav" aria-label="外部链接">
-        <a
-          href="https://github.com/Travisun/linuxdo-seal"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="GitHub 仓库"
-          aria-label="GitHub 仓库"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              fill="currentColor"
-              d="M12 2C6.477 2 2 6.586 2 12.253c0 4.537 2.865 8.387 6.839 9.748.5.094.682-.222.682-.482 0-.237-.009-.866-.014-1.7-2.782.618-3.369-1.38-3.369-1.38-.455-1.184-1.11-1.5-1.11-1.5-.908-.636.069-.623.069-.623 1.004.072 1.532 1.057 1.532 1.057.892 1.566 2.341 1.114 2.91.852.092-.663.35-1.114.636-1.37-2.22-.259-4.555-1.141-4.555-5.078 0-1.121.39-2.038 1.029-2.757-.103-.26-.446-1.302.098-2.714 0 0 .84-.276 2.75 1.052A9.34 9.34 0 0 1 12 6.844a9.34 9.34 0 0 1 2.504.346c1.909-1.328 2.748-1.052 2.748-1.052.546 1.412.203 2.454.1 2.714.64.719 1.028 1.636 1.028 2.757 0 3.947-2.338 4.816-4.566 5.07.359.317.679.943.679 1.901 0 1.371-.012 2.477-.012 2.813 0 .263.18.58.688.481A10.02 10.02 0 0 0 22 12.253C22 6.586 17.523 2 12 2Z"
-            />
-          </svg>
-        </a>
-        <a
-          href="https://linux.do?ref=seal-click"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="LINUX DO 社区"
-          aria-label="LINUX DO 社区"
-        >
-          <img src="/icon.svg" alt="" width="18" height="18" />
-        </a>
+      <nav class="topnav" aria-label="站点导航">
+        <div class="topnav-left">
+          <a
+            class="icon-only"
+            href="https://linux.do?ref=seal-click"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="LINUX DO 社区"
+            aria-label="LINUX DO 社区"
+          >
+            <img src="/icon.svg" alt="" width="18" height="18" />
+          </a>
+        </div>
+        <div class="topnav-right">
+          <a href="/skills/linuxdo-seal-badge.md" title="徽章战士 Skill" aria-label="Skills 文件">Skills</a>
+          <button type="button" id="open-agent-drawer" title="Agent 提示词">Agent</button>
+          <a
+            href="https://github.com/Travisun/linuxdo-seal"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="GitHub 仓库"
+            aria-label="GitHub 仓库"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M12 2C6.477 2 2 6.586 2 12.253c0 4.537 2.865 8.387 6.839 9.748.5.094.682-.222.682-.482 0-.237-.009-.866-.014-1.7-2.782.618-3.369-1.38-3.369-1.38-.455-1.184-1.11-1.5-1.11-1.5-.908-.636.069-.623.069-.623 1.004.072 1.532 1.057 1.532 1.057.892 1.566 2.341 1.114 2.91.852.092-.663.35-1.114.636-1.37-2.22-.259-4.555-1.141-4.555-5.078 0-1.121.39-2.038 1.029-2.757-.103-.26-.446-1.302.098-2.714 0 0 .84-.276 2.75 1.052A9.34 9.34 0 0 1 12 6.844a9.34 9.34 0 0 1 2.504.346c1.909-1.328 2.748-1.052 2.748-1.052.546 1.412.203 2.454.1 2.714.64.719 1.028 1.636 1.028 2.757 0 3.947-2.338 4.816-4.566 5.07.359.317.679.943.679 1.901 0 1.371-.012 2.477-.012 2.813 0 .263.18.58.688.481A10.02 10.02 0 0 0 22 12.253C22 6.586 17.523 2 12 2Z"
+              />
+            </svg>
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"
+              />
+            </svg>
+            <span class="star-count" id="gh-stars">–</span>
+          </a>
+        </div>
       </nav>
 
       <header>
@@ -820,7 +974,7 @@
           <img src="/logo.svg" alt="LINUX DO" width="156" height="48" />
         </a>
         <h1>社区徽章引用</h1>
-        <p class="lede">推荐将 LINUX.DO 部署在您的 GitHub README 和项目主页进行展示。</p>
+        <p class="lede">选择一个徽章并将代码部署在您的 GitHub README 和项目主页中进行展示。</p>
       </header>
 
       <div class="steps" role="navigation" aria-label="步骤">
@@ -890,34 +1044,25 @@
         <a href="https://linux.do?ref=seal-click" target="_blank" rel="noopener noreferrer">linux.do</a>
       </footer>
 
-      <section class="aeo" aria-labelledby="aeo-title">
-        <h2 id="aeo-title">给开发者与 AI Agent</h2>
+      <section class="visually-hidden" aria-hidden="true" data-agent-index>
+        <h2>给开发者与 AI Agent</h2>
         <p>
-          推荐将 LINUX.DO 部署在您的 GitHub README 和项目主页进行展示。徽章为 CDN 静态 SVG；尺寸用 HTML
-          <code>width</code>/<code>height</code> 控制。Agent 请遵循
+          选择一个徽章并将代码部署在您的 GitHub README 和项目主页中进行展示。徽章为 CDN 静态 SVG；尺寸用 HTML
+          width/height 控制。Agent 请遵循
           <a href="/skills/linuxdo-seal-badge.md">徽章战士 Skill</a>
-          （仓库路径 <code>.cursor/skills/linuxdo-seal-badge/SKILL.md</code>）。
+          与 <a href="/llms.txt">llms.txt</a>。
         </p>
-        <h3>嵌入模板</h3>
-        <pre><code>&lt;a href="https://linux.do?ref=seal-click" target="_blank" rel="noopener noreferrer" title="Powered by LINUX DO"&gt;
-  &lt;img src="https://linuxdo-seal.cuishushu.com/seals/seal-powered-by.svg" alt="Powered by LINUX DO" width="180" height="55" /&gt;
-&lt;/a&gt;</code></pre>
-        <h3>可用印章 ID</h3>
+        <p>图片 URL：https://linuxdo-seal.cuishushu.com/seals/seal-{id}.svg</p>
         <ul>
-          <li><code>powered-by</code> — Powered by LINUX DO</li>
-          <li><code>loved-by</code> — Loved by LINUX DO</li>
-          <li><code>born-in</code> — Born in LINUX DO</li>
-          <li><code>proudly-from</code> — Proudly from LINUX DO</li>
-          <li><code>proud-member</code> — Proud Member of LINUX DO</li>
-          <li><code>support-by</code> — Supported by LINUX DO</li>
-          <li><code>best-community</code> — Best Community · LINUX DO</li>
-          <li><code>pioneer-project</code> — LINUX DO Pioneer Project</li>
+          <li>powered-by — Powered by LINUX DO</li>
+          <li>loved-by — Loved by LINUX DO</li>
+          <li>born-in — Born in LINUX DO</li>
+          <li>proudly-from — Proudly from LINUX DO</li>
+          <li>proud-member — Proud Member of LINUX DO</li>
+          <li>support-by — Supported by LINUX DO</li>
+          <li>best-community — Best Community · LINUX DO</li>
+          <li>pioneer-project — LINUX DO Pioneer Project</li>
         </ul>
-        <p>
-          图片 URL：<code>https://linuxdo-seal.cuishushu.com/seals/seal-{id}.svg</code>
-          · 机器可读索引：<a href="/llms.txt">llms.txt</a>
-          · 源码：<a href="https://github.com/Travisun/linuxdo-seal">GitHub</a>
-        </p>
       </section>
     </div>
 
@@ -1098,6 +1243,69 @@
       document.getElementById("copy-again").addEventListener("click", copyCode);
       copyBtn.addEventListener("click", copyCode);
 
+      const AGENT_PROMPT = `请读取并严格遵循 https://linuxdo-seal.cuishushu.com/skills/linuxdo-seal-badge.md（徽章战士 Skill），为我当前项目添加 LINUX DO 社区徽章。
+
+要求：
+1. 只使用静态 SVG：https://linuxdo-seal.cuishushu.com/seals/seal-{id}.svg（禁止 ?w= 或 /badge/）
+2. 用 HTML width/height 控制尺寸（比例 309:95；默认 width=180 height=55）
+3. 点击跳转 https://linux.do?ref=seal-click，并设置 target="_blank" rel="noopener noreferrer"
+4. 将嵌入代码写入 GitHub README.md 或项目主页可见位置
+5. 完成后告知使用的印章 id、尺寸与修改的文件路径`;
+
+      const agentDrawer = document.getElementById("agent-drawer");
+      const agentPromptEl = document.getElementById("agent-prompt");
+      const copyAgentBtn = document.getElementById("copy-agent-prompt");
+      const openAgentBtn = document.getElementById("open-agent-drawer");
+      const ghStars = document.getElementById("gh-stars");
+
+      agentPromptEl.value = AGENT_PROMPT;
+
+      function openDrawer() {
+        agentDrawer.hidden = false;
+        document.body.style.overflow = "hidden";
+        copyAgentBtn.focus();
+      }
+
+      function closeDrawer() {
+        agentDrawer.hidden = true;
+        document.body.style.overflow = "";
+        openAgentBtn.focus();
+      }
+
+      openAgentBtn.addEventListener("click", openDrawer);
+      for (const el of agentDrawer.querySelectorAll("[data-close-drawer]")) {
+        el.addEventListener("click", closeDrawer);
+      }
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !agentDrawer.hidden) closeDrawer();
+      });
+
+      copyAgentBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(AGENT_PROMPT);
+        } catch {
+          agentPromptEl.select();
+          document.execCommand("copy");
+        }
+        copyAgentBtn.textContent = "已复制";
+        setTimeout(() => {
+          copyAgentBtn.textContent = "复制提示词";
+        }, 1400);
+      });
+
+      async function loadStars() {
+        try {
+          const res = await fetch("https://api.github.com/repos/Travisun/linuxdo-seal");
+          if (!res.ok) return;
+          const data = await res.json();
+          if (typeof data.stargazers_count === "number") {
+            ghStars.textContent = String(data.stargazers_count);
+          }
+        } catch {
+          /* ignore */
+        }
+      }
+
       tabReadme.addEventListener("click", () => {
         state.format = "readme";
         renderCode();
@@ -1110,6 +1318,7 @@
       renderSeals();
       renderPresets();
       setStep(1);
+      loadStars();
     </script>
   </body>
 </html>

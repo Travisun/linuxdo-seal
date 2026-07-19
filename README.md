@@ -1,6 +1,6 @@
 # LINUX DO Seal
 
-基于 Cloudflare Worker Static Assets 的窄版社区徽章引用工具。三步选择印章与尺寸，复制嵌入代码，用于 GitHub README 或自有网页展示 LINUX DO 社区徽章。
+基于 Cloudflare Worker Static Assets 的窄版社区徽章引用工具。选择一个徽章并将代码部署在您的 GitHub README 和项目主页中进行展示。
 
 **在线地址：** [https://linuxdo-seal.cuishushu.com](https://linuxdo-seal.cuishushu.com)
 
