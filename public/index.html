@@ -290,43 +290,54 @@
         display: none;
       }
 
-      .drawer-backdrop {
+      .drawer-root {
         position: fixed;
         inset: 0;
         z-index: 40;
-        background: oklch(0.2 0.02 95 / 0.35);
+      }
+
+      .drawer-backdrop {
+        position: absolute;
+        inset: 0;
+        background: oklch(0.22 0.02 95 / 0.42);
+        backdrop-filter: blur(2px);
       }
 
       .drawer {
-        position: fixed;
+        position: absolute;
         top: 0;
         left: 0;
         right: 0;
-        z-index: 50;
-        max-height: min(72dvh, 520px);
-        overflow: auto;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        max-height: min(70dvh, 480px);
+        overflow: hidden;
         background: var(--surface);
         border-bottom: 1px solid var(--line);
-        box-shadow: 0 12px 40px oklch(0.3 0.02 95 / 0.14);
-        padding: 1rem 1rem 1.25rem;
-        transform: translateY(0);
-        animation: drawer-in 220ms var(--ease);
+        box-shadow: 0 16px 48px oklch(0.28 0.02 95 / 0.16);
+        animation: drawer-in 200ms var(--ease);
       }
 
       @keyframes drawer-in {
         from {
-          transform: translateY(-12px);
-          opacity: 0.6;
+          transform: translateY(-100%);
         }
         to {
           transform: translateY(0);
-          opacity: 1;
         }
       }
 
       .drawer-inner {
-        width: min(100%, var(--max));
+        width: min(100% - 2rem, var(--max));
         margin: 0 auto;
+        padding: 1rem 0 1.15rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        min-height: 0;
+        max-height: min(70dvh, 480px);
+        box-sizing: border-box;
       }
 
       .drawer-head {
@@ -334,25 +345,41 @@
         align-items: center;
         justify-content: space-between;
         gap: 0.75rem;
-        margin-bottom: 0.75rem;
+        flex-shrink: 0;
       }
 
       .drawer-head h2 {
         margin: 0;
         font-size: 0.9375rem;
+        font-weight: 700;
         letter-spacing: -0.01em;
+        line-height: 1.2;
       }
 
       .drawer-close {
         appearance: none;
         border: 1px solid var(--line);
-        background: var(--surface);
+        background: oklch(0.98 0.005 95);
         border-radius: 8px;
         width: 32px;
         height: 32px;
-        font: inherit;
+        padding: 0;
+        margin: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 0;
         cursor: pointer;
         color: var(--ink);
+        flex-shrink: 0;
+        transition:
+          background-color 160ms var(--ease),
+          border-color 160ms var(--ease);
+      }
+
+      .drawer-close:hover {
+        background: var(--surface);
+        border-color: oklch(0.78 0.04 85);
       }
 
       .drawer-close:focus-visible {
@@ -360,25 +387,60 @@
         outline-offset: 2px;
       }
 
-      .drawer-prompt {
-        width: 100%;
-        min-height: 132px;
-        resize: vertical;
-        border: 1px solid var(--line);
+      .drawer-close svg {
+        width: 14px;
+        height: 14px;
+        display: block;
+      }
+
+      .drawer-prompt-shell {
+        flex: 1 1 auto;
+        min-height: 0;
+        max-height: 220px;
+        border: 1px solid oklch(0.28 0.01 95);
         border-radius: var(--radius);
-        background: var(--ink);
-        color: #f5f5f5;
+        background: #1c1c1e;
+        overflow: hidden;
+      }
+
+      .drawer-prompt {
+        display: block;
+        width: 100%;
+        height: 100%;
+        max-height: 220px;
+        margin: 0;
         padding: 0.85rem 0.9rem;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+        box-sizing: border-box;
+        border: 0;
+        background: #1c1c1e;
+        color: #f0f0f0;
         font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
         font-size: 0.75rem;
         line-height: 1.55;
+        white-space: pre-wrap;
+        word-break: break-word;
+        resize: none;
         outline: none;
+        scrollbar-gutter: stable;
+      }
+
+      .drawer-prompt::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .drawer-prompt::-webkit-scrollbar-thumb {
+        background: oklch(0.45 0.01 95);
+        border-radius: 999px;
       }
 
       .drawer-actions {
         display: flex;
         gap: 0.5rem;
-        margin-top: 0.75rem;
+        flex-shrink: 0;
       }
 
       .drawer-actions button,
@@ -396,19 +458,37 @@
         cursor: pointer;
         color: var(--ink);
         background: var(--surface);
+        transition:
+          filter 160ms var(--ease),
+          background-color 160ms var(--ease);
       }
 
       .drawer-actions button.primary {
-        border-color: var(--ink);
+        border-color: transparent;
         background: var(--accent);
         color: var(--accent-ink);
       }
 
+      .drawer-actions button.primary:hover {
+        filter: brightness(1.04);
+      }
+
+      .drawer-actions a:hover {
+        background: oklch(0.98 0.008 95);
+      }
+
+      .drawer-actions button:focus-visible,
+      .drawer-actions a:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 2px;
+      }
+
       .drawer-hint {
-        margin: 0.65rem 0 0;
+        margin: 0;
         font-size: 0.75rem;
         color: var(--ink-soft);
         line-height: 1.45;
+        flex-shrink: 0;
       }
 
       .visually-hidden {
@@ -914,9 +994,18 @@
         <div class="drawer-inner">
           <div class="drawer-head">
             <h2 id="drawer-title">Agent 提示词</h2>
-            <button type="button" class="drawer-close" data-close-drawer aria-label="关闭">×</button>
+            <button type="button" class="drawer-close" data-close-drawer aria-label="关闭">
+              <svg viewBox="0 0 14 14" aria-hidden="true">
+                <path
+                  d="M3.2 3.2a.75.75 0 0 1 1.06 0L7 5.94l2.74-2.74a.75.75 0 1 1 1.06 1.06L8.06 7l2.74 2.74a.75.75 0 1 1-1.06 1.06L7 8.06l-2.74 2.74a.75.75 0 0 1-1.06-1.06L5.94 7 3.2 4.26a.75.75 0 0 1 0-1.06Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </button>
           </div>
-          <textarea id="agent-prompt" class="drawer-prompt" readonly spellcheck="false"></textarea>
+          <div class="drawer-prompt-shell">
+            <pre id="agent-prompt" class="drawer-prompt" tabindex="0"></pre>
+          </div>
           <div class="drawer-actions">
             <button type="button" class="primary" id="copy-agent-prompt">复制提示词</button>
             <a href="/skills/linuxdo-seal-badge.md" target="_blank" rel="noopener noreferrer">打开 Skill</a>
@@ -1258,7 +1347,7 @@
       const openAgentBtn = document.getElementById("open-agent-drawer");
       const ghStars = document.getElementById("gh-stars");
 
-      agentPromptEl.value = AGENT_PROMPT;
+      agentPromptEl.textContent = AGENT_PROMPT;
 
       function openDrawer() {
         agentDrawer.hidden = false;
@@ -1284,8 +1373,12 @@
         try {
           await navigator.clipboard.writeText(AGENT_PROMPT);
         } catch {
-          agentPromptEl.select();
+          const tmp = document.createElement("textarea");
+          tmp.value = AGENT_PROMPT;
+          document.body.appendChild(tmp);
+          tmp.select();
           document.execCommand("copy");
+          tmp.remove();
         }
         copyAgentBtn.textContent = "已复制";
         setTimeout(() => {
