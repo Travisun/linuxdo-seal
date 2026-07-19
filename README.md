@@ -2,7 +2,7 @@
 
 基于 Cloudflare Worker 的窄版社区徽章引用工具。开源开发者与论坛用户可选择不同 Seal 类型与尺寸，一键复制 Markdown / HTML 嵌入代码，用于 GitHub README 或自有网页展示 LINUX DO 社区徽章。
 
-**在线地址：** [https://linuxdo-seal.travistang.workers.dev](https://linuxdo-seal.travistang.workers.dev)
+**在线地址：** [https://linuxdo-seal.cuishushu.com](https://linuxdo-seal.cuishushu.com)
 
 点击徽章将在新窗口打开 [https://linux.do?ref=seal-click](https://linux.do?ref=seal-click)。
 
@@ -19,7 +19,7 @@
 ### Markdown（GitHub README）
 
 ```markdown
-[![Powered by LINUX DO](https://linuxdo-seal.travistang.workers.dev/badge/powered-by.svg?w=180)](https://linux.do?ref=seal-click)
+[![Powered by LINUX DO](https://linuxdo-seal.cuishushu.com/badge/powered-by.svg?w=180)](https://linux.do?ref=seal-click)
 ```
 
 ### HTML
@@ -27,7 +27,7 @@
 ```html
 <a href="https://linux.do?ref=seal-click" target="_blank" rel="noopener noreferrer" title="Powered by LINUX DO">
   <img
-    src="https://linuxdo-seal.travistang.workers.dev/badge/powered-by.svg?w=180"
+    src="https://linuxdo-seal.cuishushu.com/badge/powered-by.svg?w=180"
     alt="Powered by LINUX DO"
     width="180"
     height="55"
@@ -51,7 +51,7 @@
 徽章 URL 格式：
 
 ```text
-https://linuxdo-seal.travistang.workers.dev/badge/{id}.svg?w={width}
+https://linuxdo-seal.cuishushu.com/badge/{id}.svg?w={width}
 ```
 
 `w` 取值范围建议 `80`–`620`，默认 `180`。

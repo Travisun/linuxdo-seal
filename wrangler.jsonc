@@ -3,9 +3,16 @@
   "name": "linuxdo-seal",
   "main": "src/index.ts",
   "compatibility_date": "2026-07-19",
+  "workers_dev": true,
   "observability": {
     "enabled": true
   },
+  "routes": [
+    {
+      "pattern": "linuxdo-seal.cuishushu.com",
+      "custom_domain": true
+    }
+  ],
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
