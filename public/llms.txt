@@ -1,6 +1,6 @@
 # LINUX DO Seal — llms.txt
 
-> 选择一个徽章并将代码部署在您的 GitHub README 和项目主页中进行展示。
+> 选择一个徽章并将代码部署在您的 GitHub README 和项目主页中。
 
 ## Site
 
