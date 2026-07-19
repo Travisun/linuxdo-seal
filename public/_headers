@@ -7,6 +7,11 @@
 /icon.svg
   Cache-Control: public, max-age=31536000, immutable
 
+/linuxdo-seal-design.sketch
+  Content-Type: application/octet-stream
+  Content-Disposition: attachment; filename="linuxdo-seal-design.sketch"
+  Cache-Control: public, max-age=86400
+
 /llms.txt
   Content-Type: text/plain; charset=utf-8
   Cache-Control: public, max-age=3600

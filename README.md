@@ -88,6 +88,12 @@ npm run deploy
 - `CLOUDFLARE_ACCOUNT_ID`
 - `CLOUDFLARE_API_TOKEN`（权限模板：Edit Cloudflare Workers）
 
+## 设计二次创作
+
+- 色板：`#F0F0F0` `#FFFFFF` `#000000` `#1C1C1E` `#FFB003`
+- Sketch 源文件：[linuxdo-seal-design.sketch](./linuxdo-seal-design.sketch)（在线下载：https://linuxdo-seal.cuishushu.com/linuxdo-seal-design.sketch）
+- 提交 PR：https://github.com/Travisun/linuxdo-seal/compare
+
 ## 徽章战士 Skill（给 AI Agent）
 
 Agent 为任意项目添加 LINUX DO 徽章时，请遵循：

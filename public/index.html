@@ -490,6 +490,109 @@
         flex-shrink: 0;
       }
 
+      .palette {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0.4rem;
+      }
+
+      .swatch {
+        appearance: none;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        border-radius: 10px;
+        padding: 0.4rem 0.3rem 0.5rem;
+        cursor: pointer;
+        font: inherit;
+        color: var(--ink);
+        text-align: center;
+        transition:
+          transform 160ms var(--ease),
+          border-color 160ms var(--ease);
+      }
+
+      .swatch:hover {
+        transform: translateY(-1px);
+        border-color: oklch(0.75 0.04 85);
+      }
+
+      .swatch:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 2px;
+      }
+
+      .swatch-chip {
+        display: block;
+        width: 100%;
+        aspect-ratio: 1;
+        border-radius: 8px;
+        border: 1px solid oklch(0.85 0.01 95);
+        margin-bottom: 0.35rem;
+      }
+
+      .swatch-chip[data-hex="#FFFFFF"],
+      .swatch-chip[data-hex="#F0F0F0"] {
+        border-color: oklch(0.82 0.01 95);
+      }
+
+      .swatch code {
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 0.58rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      .design-block {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+        flex-shrink: 0;
+      }
+
+      .design-block h3 {
+        margin: 0;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+      }
+
+      .design-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+      }
+
+      .design-links a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        padding: 0.7rem 0.8rem;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: oklch(0.99 0.005 95);
+        color: var(--ink);
+        text-decoration: none;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        transition:
+          border-color 160ms var(--ease),
+          background-color 160ms var(--ease);
+      }
+
+      .design-links a:hover {
+        border-color: oklch(0.78 0.04 85);
+        background: var(--surface);
+      }
+
+      .design-links a span {
+        font-size: 0.72rem;
+        font-weight: 500;
+        color: var(--ink-soft);
+      }
+
       .visually-hidden {
         position: absolute;
         width: 1px;
@@ -1016,9 +1119,79 @@
       </div>
     </div>
 
+    <div class="drawer-root" id="design-drawer" hidden>
+      <div class="drawer-backdrop" data-close-drawer></div>
+      <div class="drawer" role="dialog" aria-modal="true" aria-labelledby="design-drawer-title">
+        <div class="drawer-inner">
+          <div class="drawer-head">
+            <h2 id="design-drawer-title">UI 设计标准</h2>
+            <button type="button" class="drawer-close" data-close-drawer aria-label="关闭">
+              <svg viewBox="0 0 14 14" aria-hidden="true">
+                <path
+                  d="M3.2 3.2a.75.75 0 0 1 1.06 0L7 5.94l2.74-2.74a.75.75 0 1 1 1.06 1.06L8.06 7l2.74 2.74a.75.75 0 1 1-1.06 1.06L7 8.06l-2.74 2.74a.75.75 0 0 1-1.06-1.06L5.94 7 3.2 4.26a.75.75 0 0 1 0-1.06Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div class="design-block">
+            <h3>色板 · 点击复制</h3>
+            <div class="palette" role="list">
+              <button type="button" class="swatch" data-color="#F0F0F0" role="listitem" title="复制 #F0F0F0">
+                <span class="swatch-chip" data-hex="#F0F0F0" style="background:#F0F0F0"></span>
+                <code>#F0F0F0</code>
+              </button>
+              <button type="button" class="swatch" data-color="#FFFFFF" role="listitem" title="复制 #FFFFFF">
+                <span class="swatch-chip" data-hex="#FFFFFF" style="background:#FFFFFF"></span>
+                <code>#FFFFFF</code>
+              </button>
+              <button type="button" class="swatch" data-color="#000000" role="listitem" title="复制 #000000">
+                <span class="swatch-chip" data-hex="#000000" style="background:#000000"></span>
+                <code>#000000</code>
+              </button>
+              <button type="button" class="swatch" data-color="#1C1C1E" role="listitem" title="复制 #1C1C1E">
+                <span class="swatch-chip" data-hex="#1C1C1E" style="background:#1C1C1E"></span>
+                <code>#1C1C1E</code>
+              </button>
+              <button type="button" class="swatch" data-color="#FFB003" role="listitem" title="复制 #FFB003">
+                <span class="swatch-chip" data-hex="#FFB003" style="background:#FFB003"></span>
+                <code>#FFB003</code>
+              </button>
+            </div>
+          </div>
+
+          <div class="design-block">
+            <h3>二次创作</h3>
+            <div class="design-links">
+              <a href="/linuxdo-seal-design.sketch" download="linuxdo-seal-design.sketch">
+                下载 Sketch 源文件
+                <span>linuxdo-seal-design.sketch</span>
+              </a>
+              <a
+                href="https://github.com/Travisun/linuxdo-seal/compare"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                提交设计 / 资源 PR
+                <span>github.com/…/compare</span>
+              </a>
+            </div>
+          </div>
+
+          <p class="drawer-hint">
+            请基于上述色板与 Sketch 规范进行二次创作；完成后向
+            <a href="https://github.com/Travisun/linuxdo-seal/compare" target="_blank" rel="noopener noreferrer">仓库 Compare 页</a>
+            发起 Pull Request。
+          </p>
+        </div>
+      </div>
+    </div>
+
     <div class="wrap">
       <nav class="topnav" aria-label="站点导航">
         <div class="topnav-right">
+          <button type="button" id="open-design-drawer" title="UI 设计标准">Design</button>
           <a href="/skills/linuxdo-seal-badge.md" title="徽章战士 Skill" aria-label="Skills 文件">Skills</a>
           <button type="button" id="open-agent-drawer" title="Agent 提示词">Agent</button>
           <a
@@ -1329,31 +1502,43 @@
 5. 完成后告知使用的印章 id、尺寸与修改的文件路径`;
 
       const agentDrawer = document.getElementById("agent-drawer");
+      const designDrawer = document.getElementById("design-drawer");
       const agentPromptEl = document.getElementById("agent-prompt");
       const copyAgentBtn = document.getElementById("copy-agent-prompt");
       const openAgentBtn = document.getElementById("open-agent-drawer");
+      const openDesignBtn = document.getElementById("open-design-drawer");
       const ghStars = document.getElementById("gh-stars");
 
       agentPromptEl.textContent = AGENT_PROMPT;
 
-      function openDrawer() {
-        agentDrawer.hidden = false;
-        document.body.style.overflow = "hidden";
-        copyAgentBtn.focus();
-      }
-
-      function closeDrawer() {
+      function openDrawer(drawer, focusEl) {
         agentDrawer.hidden = true;
-        document.body.style.overflow = "";
-        openAgentBtn.focus();
+        designDrawer.hidden = true;
+        drawer.hidden = false;
+        document.body.style.overflow = "hidden";
+        focusEl?.focus();
       }
 
-      openAgentBtn.addEventListener("click", openDrawer);
-      for (const el of agentDrawer.querySelectorAll("[data-close-drawer]")) {
-        el.addEventListener("click", closeDrawer);
+      function closeDrawers(restoreFocus) {
+        const wasAgent = !agentDrawer.hidden;
+        agentDrawer.hidden = true;
+        designDrawer.hidden = true;
+        document.body.style.overflow = "";
+        if (restoreFocus !== false) {
+          (wasAgent ? openAgentBtn : openDesignBtn).focus();
+        }
+      }
+
+      openAgentBtn.addEventListener("click", () => openDrawer(agentDrawer, copyAgentBtn));
+      openDesignBtn.addEventListener("click", () => openDrawer(designDrawer, openDesignBtn));
+
+      for (const el of document.querySelectorAll("[data-close-drawer]")) {
+        el.addEventListener("click", () => closeDrawers());
       }
       document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && !agentDrawer.hidden) closeDrawer();
+        if (e.key === "Escape" && (!agentDrawer.hidden || !designDrawer.hidden)) {
+          closeDrawers();
+        }
       });
 
       copyAgentBtn.addEventListener("click", async () => {
@@ -1372,6 +1557,23 @@
           copyAgentBtn.textContent = "复制提示词";
         }, 1400);
       });
+
+      for (const swatch of document.querySelectorAll(".swatch")) {
+        swatch.addEventListener("click", async () => {
+          const color = swatch.dataset.color;
+          try {
+            await navigator.clipboard.writeText(color);
+          } catch {
+            /* ignore */
+          }
+          const code = swatch.querySelector("code");
+          const prev = code.textContent;
+          code.textContent = "已复制";
+          setTimeout(() => {
+            code.textContent = prev;
+          }, 900);
+        });
+      }
 
       async function loadStars() {
         try {
