@@ -3,9 +3,138 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>LINUX DO Seal · 社区徽章</title>
-    <meta name="description" content="推荐将 LINUX.DO 部署在您的 GitHub README 和项目主页进行展示。" />
+    <title>LINUX DO Seal · 社区徽章嵌入工具</title>
+    <meta
+      name="description"
+      content="推荐将 LINUX.DO 部署在您的 GitHub README 和项目主页进行展示。三步选择印章与尺寸，复制静态 SVG 嵌入代码；供开发者与 AI Agent 为开源项目添加 LINUX DO 社区徽章。"
+    />
+    <meta
+      name="keywords"
+      content="LINUX DO, LINUX.DO, seal, badge, 社区徽章, GitHub README, Cloudflare Worker, 开源徽章, 徽章战士"
+    />
+    <meta name="author" content="LINUX DO Seal" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://linuxdo-seal.cuishushu.com/" />
+    <link rel="alternate" type="text/plain" href="https://linuxdo-seal.cuishushu.com/llms.txt" title="llms.txt" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:site_name" content="LINUX DO Seal" />
+    <meta property="og:url" content="https://linuxdo-seal.cuishushu.com/" />
+    <meta property="og:title" content="LINUX DO Seal · 社区徽章嵌入工具" />
+    <meta
+      property="og:description"
+      content="推荐将 LINUX.DO 部署在您的 GitHub README 和项目主页进行展示。静态 SVG 徽章，三步复制嵌入代码。"
+    />
+    <meta property="og:image" content="https://linuxdo-seal.cuishushu.com/seals/seal-powered-by.svg" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="LINUX DO Seal · 社区徽章嵌入工具" />
+    <meta
+      name="twitter:description"
+      content="为 GitHub README 与项目主页添加 LINUX DO 社区徽章。静态 SVG + HTML 尺寸控制。"
+    />
+    <meta name="twitter:image" content="https://linuxdo-seal.cuishushu.com/seals/seal-powered-by.svg" />
+
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icon.svg" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://linuxdo-seal.cuishushu.com/#website",
+            "url": "https://linuxdo-seal.cuishushu.com/",
+            "name": "LINUX DO Seal",
+            "description": "LINUX DO 社区徽章嵌入工具。推荐将 LINUX.DO 部署在您的 GitHub README 和项目主页进行展示。",
+            "inLanguage": "zh-CN",
+            "publisher": {
+              "@type": "Organization",
+              "name": "LINUX DO",
+              "url": "https://linux.do/"
+            }
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://linuxdo-seal.cuishushu.com/#app",
+            "name": "LINUX DO Seal",
+            "url": "https://linuxdo-seal.cuishushu.com/",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "description": "三步生成 LINUX DO 社区徽章嵌入代码，静态 SVG 由 CDN 缓存，尺寸通过 HTML width/height 控制。"
+          },
+          {
+            "@type": "HowTo",
+            "@id": "https://linuxdo-seal.cuishushu.com/#howto",
+            "name": "如何为项目添加 LINUX DO 社区徽章",
+            "description": "使用 LINUX DO Seal 工具为 GitHub README 或项目主页添加可点击的社区徽章。",
+            "totalTime": "PT2M",
+            "tool": {
+              "@type": "HowToTool",
+              "name": "LINUX DO Seal"
+            },
+            "step": [
+              {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "选择印章",
+                "text": "在工具页选择印章类型，例如 Powered by、Loved by、Proud Member。"
+              },
+              {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "选择尺寸",
+                "text": "选择预设宽度或自定义宽度，预览徽章展示效果。高度按 309:95 比例自动计算。"
+              },
+              {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "复制并嵌入",
+                "text": "复制 README 或 HTML 代码，粘贴到 GitHub README.md 或项目主页。徽章图片为静态 SVG，点击跳转到 https://linux.do?ref=seal-click 。"
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://linuxdo-seal.cuishushu.com/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "徽章图片地址是什么？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "静态地址格式为 https://linuxdo-seal.cuishushu.com/seals/seal-{id}.svg ，例如 seal-powered-by.svg。不要使用带 ?w= 的动态地址。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "如何控制徽章尺寸？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "在 HTML img 标签上设置 width 与 height。GitHub README 支持 HTML 片段。原生 SVG 比例为 309:95。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "AI Agent 如何自动为项目添加徽章？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "遵循项目中的徽章战士 Skill：https://linuxdo-seal.cuishushu.com/skills/linuxdo-seal-badge.md 或仓库 .cursor/skills/linuxdo-seal-badge/SKILL.md 。"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -223,22 +352,44 @@
         color: var(--ink-soft);
       }
 
+      .seal-scroll {
+        max-height: min(268px, 38dvh);
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 0.4rem;
+        background: oklch(1 0 0 / 0.55);
+        scrollbar-gutter: stable;
+      }
+
+      .seal-scroll::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .seal-scroll::-webkit-scrollbar-thumb {
+        background: oklch(0.78 0.02 95);
+        border-radius: 999px;
+      }
+
       .seal-grid {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 0.45rem;
+        gap: 0.4rem;
       }
 
       .seal-option {
         appearance: none;
         border: 1px solid var(--line);
         background: var(--surface);
-        border-radius: var(--radius);
-        padding: 0.65rem 0.75rem;
+        border-radius: 8px;
+        padding: 0.55rem 0.65rem;
         display: grid;
         grid-template-columns: 1fr auto;
         align-items: center;
-        gap: 0.75rem;
+        gap: 0.65rem;
         cursor: pointer;
         text-align: left;
         color: inherit;
@@ -574,6 +725,57 @@
         text-underline-offset: 2px;
       }
 
+      .aeo {
+        margin-top: 2.25rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--line);
+        font-size: 0.8125rem;
+        line-height: 1.55;
+        color: var(--ink-soft);
+      }
+
+      .aeo h2 {
+        margin: 0 0 0.55rem;
+        font-size: 0.9375rem;
+        color: var(--ink);
+        letter-spacing: -0.01em;
+      }
+
+      .aeo h3 {
+        margin: 1rem 0 0.4rem;
+        font-size: 0.8125rem;
+        color: var(--ink);
+      }
+
+      .aeo p,
+      .aeo ul {
+        margin: 0.4rem 0 0;
+      }
+
+      .aeo ul {
+        padding-left: 1.1rem;
+      }
+
+      .aeo a {
+        color: var(--ink);
+      }
+
+      .aeo code,
+      .aeo pre {
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 0.72rem;
+      }
+
+      .aeo pre {
+        margin: 0.5rem 0 0;
+        padding: 0.75rem;
+        overflow-x: auto;
+        border-radius: 8px;
+        background: var(--ink);
+        color: #f5f5f5;
+        line-height: 1.5;
+      }
+
       @media (prefers-reduced-motion: reduce) {
         *,
         *::before,
@@ -629,7 +831,9 @@
 
       <section class="panel" id="step-1" aria-labelledby="seal-label">
         <div class="label" id="seal-label">选择印章</div>
-        <div class="seal-grid" id="seal-grid" role="radiogroup" aria-labelledby="seal-label"></div>
+        <div class="seal-scroll" tabindex="0" aria-label="印章列表，可上下滚动">
+          <div class="seal-grid" id="seal-grid" role="radiogroup" aria-labelledby="seal-label"></div>
+        </div>
         <div class="nav">
           <button type="button" class="primary" id="to-step-2">下一步：尺寸</button>
         </div>
@@ -685,6 +889,36 @@
         点击徽章将跳转到
         <a href="https://linux.do?ref=seal-click" target="_blank" rel="noopener noreferrer">linux.do</a>
       </footer>
+
+      <section class="aeo" aria-labelledby="aeo-title">
+        <h2 id="aeo-title">给开发者与 AI Agent</h2>
+        <p>
+          推荐将 LINUX.DO 部署在您的 GitHub README 和项目主页进行展示。徽章为 CDN 静态 SVG；尺寸用 HTML
+          <code>width</code>/<code>height</code> 控制。Agent 请遵循
+          <a href="/skills/linuxdo-seal-badge.md">徽章战士 Skill</a>
+          （仓库路径 <code>.cursor/skills/linuxdo-seal-badge/SKILL.md</code>）。
+        </p>
+        <h3>嵌入模板</h3>
+        <pre><code>&lt;a href="https://linux.do?ref=seal-click" target="_blank" rel="noopener noreferrer" title="Powered by LINUX DO"&gt;
+  &lt;img src="https://linuxdo-seal.cuishushu.com/seals/seal-powered-by.svg" alt="Powered by LINUX DO" width="180" height="55" /&gt;
+&lt;/a&gt;</code></pre>
+        <h3>可用印章 ID</h3>
+        <ul>
+          <li><code>powered-by</code> — Powered by LINUX DO</li>
+          <li><code>loved-by</code> — Loved by LINUX DO</li>
+          <li><code>born-in</code> — Born in LINUX DO</li>
+          <li><code>proudly-from</code> — Proudly from LINUX DO</li>
+          <li><code>proud-member</code> — Proud Member of LINUX DO</li>
+          <li><code>support-by</code> — Supported by LINUX DO</li>
+          <li><code>best-community</code> — Best Community · LINUX DO</li>
+          <li><code>pioneer-project</code> — LINUX DO Pioneer Project</li>
+        </ul>
+        <p>
+          图片 URL：<code>https://linuxdo-seal.cuishushu.com/seals/seal-{id}.svg</code>
+          · 机器可读索引：<a href="/llms.txt">llms.txt</a>
+          · 源码：<a href="https://github.com/Travisun/linuxdo-seal">GitHub</a>
+        </p>
+      </section>
     </div>
 
     <script>

@@ -1,0 +1,49 @@
+# LINUX DO Seal — llms.txt
+
+> 推荐将 LINUX.DO 部署在您的 GitHub README 和项目主页进行展示。
+
+## Site
+
+- Home: https://linuxdo-seal.cuishushu.com/
+- GitHub: https://github.com/Travisun/linuxdo-seal
+- Community: https://linux.do?ref=seal-click
+- License: MIT
+
+## For AI Agents（徽章战士）
+
+Follow the skill steps to add a community seal to any project:
+
+- Skill (canonical): https://linuxdo-seal.cuishushu.com/skills/linuxdo-seal-badge.md
+- Skill (repo): https://github.com/Travisun/linuxdo-seal/blob/main/.cursor/skills/linuxdo-seal-badge/SKILL.md
+
+Rules:
+
+1. Use static SVG only: `https://linuxdo-seal.cuishushu.com/seals/seal-{id}.svg`
+2. Never use `/badge/` or `?w=` dynamic sizing URLs
+3. Control size with HTML `width` / `height` (aspect 309:95)
+4. Link clicks to `https://linux.do?ref=seal-click` with `target="_blank" rel="noopener noreferrer"`
+
+## Seal IDs
+
+- powered-by — Powered by LINUX DO
+- loved-by — Loved by LINUX DO
+- born-in — Born in LINUX DO
+- proudly-from — Proudly from LINUX DO
+- proud-member — Proud Member of LINUX DO
+- support-by — Supported by LINUX DO
+- best-community — Best Community · LINUX DO
+- pioneer-project — LINUX DO Pioneer Project
+
+## Embed template
+
+```html
+<a href="https://linux.do?ref=seal-click" target="_blank" rel="noopener noreferrer" title="Powered by LINUX DO">
+  <img src="https://linuxdo-seal.cuishushu.com/seals/seal-powered-by.svg" alt="Powered by LINUX DO" width="180" height="55" />
+</a>
+```
+
+## Human tool flow
+
+1. Choose seal
+2. Choose size (preview)
+3. Copy README/HTML snippet

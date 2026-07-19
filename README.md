@@ -84,6 +84,16 @@ npm run deploy
 - `CLOUDFLARE_ACCOUNT_ID`
 - `CLOUDFLARE_API_TOKEN`（权限模板：Edit Cloudflare Workers）
 
+## 徽章战士 Skill（给 AI Agent）
+
+Agent 为任意项目添加 LINUX DO 徽章时，请遵循：
+
+- 仓库：[`.cursor/skills/linuxdo-seal-badge/SKILL.md`](./.cursor/skills/linuxdo-seal-badge/SKILL.md)
+- 在线：https://linuxdo-seal.cuishushu.com/skills/linuxdo-seal-badge.md
+- 机器索引：https://linuxdo-seal.cuishushu.com/llms.txt
+
+核心规则：只用静态 `/seals/seal-{id}.svg`，用 HTML `width`/`height` 控尺寸，点击跳转 `https://linux.do?ref=seal-click`。
+
 ## License
 
 [MIT](./LICENSE)
