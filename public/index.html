@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LINUX DO Seal · 社区徽章</title>
+    <meta name="description" content="选择 LINUX DO 社区印章，生成可嵌入 GitHub README 与网页的徽章代码。" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #1c1c1e;
+        --ink-soft: oklch(0.42 0.01 95);
+        --line: oklch(0.9 0.01 95);
+        --surface: #ffffff;
+        --bg: oklch(0.97 0.008 95);
+        --accent: #ffb003;
+        --accent-ink: #1c1c1e;
+        --focus: #ffb003;
+        --radius: 10px;
+        --max: 440px;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        font-family: "Plus Jakarta Sans", "PingFang SC", "Hiragino Sans GB", sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        background:
+          radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.92 0.08 85 / 0.55), transparent 70%),
+          linear-gradient(180deg, oklch(0.985 0.006 95) 0%, var(--bg) 40%, oklch(0.955 0.012 95) 100%);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.35;
+        background-image: radial-gradient(var(--ink) 0.6px, transparent 0.6px);
+        background-size: 14px 14px;
+        mask-image: linear-gradient(180deg, #000 0%, transparent 85%);
+      }
+
+      .wrap {
+        position: relative;
+        width: min(100% - 2rem, var(--max));
+        margin: 0 auto;
+        padding: 2.25rem 0 3.5rem;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 1.75rem;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.85rem;
+      }
+
+      .brand img {
+        height: 36px;
+        width: auto;
+        display: block;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 1.125rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        text-wrap: balance;
+      }
+
+      .lede {
+        margin: 0.4rem 0 0;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        color: var(--ink-soft);
+      }
+
+      section {
+        margin-top: 1.35rem;
+      }
+
+      .label {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.75rem;
+        margin-bottom: 0.55rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+      }
+
+      .seal-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.45rem;
+      }
+
+      .seal-option {
+        appearance: none;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        border-radius: var(--radius);
+        padding: 0.65rem 0.75rem;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 0.75rem;
+        cursor: pointer;
+        text-align: left;
+        color: inherit;
+        font: inherit;
+        transition:
+          border-color 180ms var(--ease),
+          background-color 180ms var(--ease),
+          transform 180ms var(--ease);
+      }
+
+      .seal-option:hover {
+        border-color: oklch(0.78 0.04 85);
+        background: oklch(0.995 0.01 95);
+      }
+
+      .seal-option:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 2px;
+      }
+
+      .seal-option[aria-checked="true"] {
+        border-color: var(--ink);
+        background: oklch(0.99 0.02 95);
+        box-shadow: inset 0 0 0 1px var(--ink);
+      }
+
+      .seal-option .meta strong {
+        display: block;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+
+      .seal-option .meta span {
+        display: block;
+        margin-top: 0.15rem;
+        font-size: 0.75rem;
+        color: var(--ink-soft);
+      }
+
+      .seal-option .thumb {
+        width: 92px;
+        height: 28px;
+        object-fit: contain;
+        display: block;
+      }
+
+      .preview-box {
+        border: 1px solid var(--line);
+        background:
+          linear-gradient(45deg, oklch(0.94 0.005 95) 25%, transparent 25%),
+          linear-gradient(-45deg, oklch(0.94 0.005 95) 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, oklch(0.94 0.005 95) 75%),
+          linear-gradient(-45deg, transparent 75%, oklch(0.94 0.005 95) 75%);
+        background-size: 16px 16px;
+        background-position:
+          0 0,
+          0 8px,
+          8px -8px,
+          -8px 0;
+        background-color: var(--surface);
+        border-radius: var(--radius);
+        min-height: 112px;
+        display: grid;
+        place-items: center;
+        padding: 1.25rem;
+      }
+
+      .preview-box a {
+        display: inline-flex;
+        line-height: 0;
+        transition: transform 200ms var(--ease);
+      }
+
+      .preview-box a:hover {
+        transform: translateY(-1px);
+      }
+
+      .preview-box img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .size-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-bottom: 0.65rem;
+      }
+
+      .chip {
+        appearance: none;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        border-radius: 999px;
+        padding: 0.4rem 0.75rem;
+        font: inherit;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        cursor: pointer;
+        color: var(--ink);
+        transition:
+          background-color 160ms var(--ease),
+          border-color 160ms var(--ease),
+          color 160ms var(--ease);
+      }
+
+      .chip:hover {
+        border-color: oklch(0.75 0.05 85);
+      }
+
+      .chip:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 2px;
+      }
+
+      .chip[aria-pressed="true"] {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: #fff;
+      }
+
+      .custom-size {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0.5rem;
+        align-items: center;
+      }
+
+      .field {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        border-radius: var(--radius);
+        padding: 0.55rem 0.75rem;
+      }
+
+      .field:focus-within {
+        border-color: var(--ink);
+        box-shadow: 0 0 0 3px oklch(0.9 0.08 85 / 0.55);
+      }
+
+      .field label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--ink-soft);
+        white-space: nowrap;
+      }
+
+      .field input {
+        width: 100%;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        font: inherit;
+        font-size: 0.9375rem;
+        font-variant-numeric: tabular-nums;
+        color: var(--ink);
+      }
+
+      .hint {
+        font-size: 0.75rem;
+        color: var(--ink-soft);
+        white-space: nowrap;
+      }
+
+      .tabs {
+        display: flex;
+        gap: 0.25rem;
+        padding: 0.2rem;
+        background: oklch(0.94 0.01 95);
+        border-radius: 999px;
+        margin-bottom: 0.65rem;
+      }
+
+      .tab {
+        flex: 1;
+        appearance: none;
+        border: 0;
+        background: transparent;
+        border-radius: 999px;
+        padding: 0.45rem 0.5rem;
+        font: inherit;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        cursor: pointer;
+        color: var(--ink-soft);
+        transition:
+          background-color 160ms var(--ease),
+          color 160ms var(--ease),
+          box-shadow 160ms var(--ease);
+      }
+
+      .tab[aria-selected="true"] {
+        background: var(--surface);
+        color: var(--ink);
+        box-shadow: 0 1px 2px oklch(0.3 0.02 95 / 0.08);
+      }
+
+      .tab:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 2px;
+      }
+
+      .code-panel {
+        position: relative;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 118px;
+        resize: vertical;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--ink);
+        color: #f5f5f5;
+        padding: 0.85rem 0.9rem 2.75rem;
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 0.75rem;
+        line-height: 1.55;
+        outline: none;
+      }
+
+      textarea:focus {
+        box-shadow: 0 0 0 3px oklch(0.9 0.08 85 / 0.55);
+      }
+
+      .copy-btn {
+        position: absolute;
+        right: 0.55rem;
+        bottom: 0.55rem;
+        appearance: none;
+        border: 0;
+        border-radius: 8px;
+        background: var(--accent);
+        color: var(--accent-ink);
+        font: inherit;
+        font-size: 0.8125rem;
+        font-weight: 700;
+        padding: 0.45rem 0.8rem;
+        cursor: pointer;
+        transition:
+          transform 160ms var(--ease),
+          filter 160ms var(--ease);
+      }
+
+      .copy-btn:hover {
+        filter: brightness(1.04);
+      }
+
+      .copy-btn:active {
+        transform: scale(0.98);
+      }
+
+      .copy-btn:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 2px;
+      }
+
+      .copy-btn[data-copied="true"] {
+        background: #fff;
+      }
+
+      footer {
+        margin-top: 1.75rem;
+        text-align: center;
+        font-size: 0.75rem;
+        color: var(--ink-soft);
+      }
+
+      footer a {
+        color: var(--ink);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          transition: none !important;
+          animation: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <a class="brand" href="https://linux.do?ref=seal-click" target="_blank" rel="noopener noreferrer">
+          <img src="/logo.svg" alt="LINUX DO" width="156" height="48" />
+        </a>
+        <h1>社区徽章引用</h1>
+        <p class="lede">选择印章与尺寸，复制代码嵌入 README 或网页。</p>
+      </header>
+
+      <section aria-labelledby="seal-label">
+        <div class="label" id="seal-label">印章类型</div>
+        <div class="seal-grid" id="seal-grid" role="radiogroup" aria-labelledby="seal-label"></div>
+      </section>
+
+      <section aria-labelledby="size-label">
+        <div class="label" id="size-label">
+          <span>展示尺寸</span>
+          <span id="size-readout">180 × 55</span>
+        </div>
+        <div class="size-row" id="size-presets" role="group" aria-labelledby="size-label"></div>
+        <div class="custom-size">
+          <div class="field">
+            <label for="width-input">宽度</label>
+            <input id="width-input" type="number" min="80" max="620" step="1" value="180" inputmode="numeric" />
+          </div>
+          <span class="hint">高度按比例</span>
+        </div>
+      </section>
+
+      <section aria-labelledby="preview-label">
+        <div class="label" id="preview-label">预览</div>
+        <div class="preview-box" id="preview"></div>
+      </section>
+
+      <section aria-labelledby="code-label">
+        <div class="label" id="code-label">嵌入代码</div>
+        <div class="tabs" role="tablist" aria-label="代码格式">
+          <button type="button" class="tab" role="tab" id="tab-md" aria-selected="true" aria-controls="code-out">
+            Markdown
+          </button>
+          <button type="button" class="tab" role="tab" id="tab-html" aria-selected="false" aria-controls="code-out">
+            HTML
+          </button>
+        </div>
+        <div class="code-panel">
+          <label class="visually-hidden" for="code-out" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">
+            嵌入代码
+          </label>
+          <textarea id="code-out" readonly spellcheck="false"></textarea>
+          <button type="button" class="copy-btn" id="copy-btn">复制</button>
+        </div>
+      </section>
+
+      <footer>
+        点击徽章将跳转到
+        <a href="https://linux.do?ref=seal-click" target="_blank" rel="noopener noreferrer">linux.do</a>
+      </footer>
+    </div>
+
+    <script>
+      const LINK = "https://linux.do?ref=seal-click";
+      const NATIVE_W = 309;
+      const NATIVE_H = 95;
+      const MIN_W = 80;
+      const MAX_W = 620;
+      const PRESETS = [120, 160, 180, 220, 280];
+
+      const SEALS = [
+        { id: "powered-by", name: "Powered by", title: "Powered by LINUX DO" },
+        { id: "loved-by", name: "Loved by", title: "Loved by LINUX DO" },
+        { id: "born-in", name: "Born in", title: "Born in LINUX DO" },
+        { id: "proudly-from", name: "Proudly from", title: "Proudly from LINUX DO" },
+        { id: "proud-member", name: "Proud Member", title: "Proud Member of LINUX DO" },
+        { id: "support-by", name: "Supported by", title: "Supported by LINUX DO" },
+        { id: "best-community", name: "Best Community", title: "Best Community · LINUX DO" },
+        { id: "pioneer-project", name: "Pioneer Project", title: "LINUX DO Pioneer Project" },
+      ];
+
+      const state = {
+        sealId: "powered-by",
+        width: 180,
+        format: "md",
+      };
+
+      const sealGrid = document.getElementById("seal-grid");
+      const sizePresets = document.getElementById("size-presets");
+      const widthInput = document.getElementById("width-input");
+      const sizeReadout = document.getElementById("size-readout");
+      const preview = document.getElementById("preview");
+      const codeOut = document.getElementById("code-out");
+      const copyBtn = document.getElementById("copy-btn");
+      const tabMd = document.getElementById("tab-md");
+      const tabHtml = document.getElementById("tab-html");
+
+      function heightFor(width) {
+        return Math.max(1, Math.round((width * NATIVE_H) / NATIVE_W));
+      }
+
+      function clampWidth(n) {
+        if (!Number.isFinite(n)) return 180;
+        return Math.min(MAX_W, Math.max(MIN_W, Math.round(n)));
+      }
+
+      function currentSeal() {
+        return SEALS.find((s) => s.id === state.sealId) || SEALS[0];
+      }
+
+      function badgeUrl(absolute) {
+        const path = `/badge/${state.sealId}.svg?w=${state.width}`;
+        return absolute ? new URL(path, location.origin).href : path;
+      }
+
+      function markdownCode() {
+        const seal = currentSeal();
+        const src = badgeUrl(true);
+        return `[![${seal.title}](${src})](${LINK})`;
+      }
+
+      function htmlCode() {
+        const seal = currentSeal();
+        const src = badgeUrl(true);
+        const h = heightFor(state.width);
+        return `<a href="${LINK}" target="_blank" rel="noopener noreferrer" title="${seal.title}">\n  <img src="${src}" alt="${seal.title}" width="${state.width}" height="${h}" />\n</a>`;
+      }
+
+      function renderSeals() {
+        sealGrid.innerHTML = "";
+        for (const seal of SEALS) {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "seal-option";
+          btn.setAttribute("role", "radio");
+          btn.setAttribute("aria-checked", String(seal.id === state.sealId));
+          btn.title = seal.title;
+          btn.innerHTML = `
+            <span class="meta">
+              <strong>${seal.name}</strong>
+              <span>${seal.title}</span>
+            </span>
+            <img class="thumb" src="/seals/seal-${seal.id}.svg" alt="" width="92" height="28" loading="lazy" />
+          `;
+          btn.addEventListener("click", () => {
+            state.sealId = seal.id;
+            render();
+          });
+          sealGrid.appendChild(btn);
+        }
+      }
+
+      function renderPresets() {
+        sizePresets.innerHTML = "";
+        for (const w of PRESETS) {
+          const chip = document.createElement("button");
+          chip.type = "button";
+          chip.className = "chip";
+          chip.textContent = String(w);
+          chip.setAttribute("aria-pressed", String(w === state.width));
+          chip.addEventListener("click", () => {
+            state.width = w;
+            widthInput.value = String(w);
+            render();
+          });
+          sizePresets.appendChild(chip);
+        }
+      }
+
+      function renderPreview() {
+        const seal = currentSeal();
+        const src = badgeUrl(false);
+        const h = heightFor(state.width);
+        preview.innerHTML = `
+          <a href="${LINK}" target="_blank" rel="noopener noreferrer" title="${seal.title}">
+            <img src="${src}" alt="${seal.title}" width="${state.width}" height="${h}" />
+          </a>
+        `;
+      }
+
+      function renderCode() {
+        codeOut.value = state.format === "html" ? htmlCode() : markdownCode();
+        tabMd.setAttribute("aria-selected", String(state.format === "md"));
+        tabHtml.setAttribute("aria-selected", String(state.format === "html"));
+      }
+
+      function render() {
+        state.width = clampWidth(state.width);
+        widthInput.value = String(state.width);
+        sizeReadout.textContent = `${state.width} × ${heightFor(state.width)}`;
+        renderSeals();
+        renderPresets();
+        renderPreview();
+        renderCode();
+      }
+
+      widthInput.addEventListener("input", () => {
+        const next = clampWidth(Number(widthInput.value));
+        state.width = next;
+        sizeReadout.textContent = `${next} × ${heightFor(next)}`;
+        renderPresets();
+        renderPreview();
+        renderCode();
+      });
+
+      widthInput.addEventListener("change", () => {
+        state.width = clampWidth(Number(widthInput.value));
+        render();
+      });
+
+      tabMd.addEventListener("click", () => {
+        state.format = "md";
+        renderCode();
+      });
+
+      tabHtml.addEventListener("click", () => {
+        state.format = "html";
+        renderCode();
+      });
+
+      copyBtn.addEventListener("click", async () => {
+        const text = codeOut.value;
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          codeOut.select();
+          document.execCommand("copy");
+        }
+        copyBtn.dataset.copied = "true";
+        copyBtn.textContent = "已复制";
+        setTimeout(() => {
+          copyBtn.dataset.copied = "false";
+          copyBtn.textContent = "复制";
+        }, 1400);
+      });
+
+      render();
+    </script>
+  </body>
+</html>
