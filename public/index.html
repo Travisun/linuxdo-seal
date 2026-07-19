@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>LINUX DO Seal · 社区徽章</title>
-    <meta name="description" content="三步获取 LINUX DO 社区徽章代码，嵌入 GitHub README 或网页。" />
+    <meta name="description" content="推荐将 LINUX.DO 部署在您的 GitHub README 和项目主页进行展示。" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,21 +38,39 @@
       body {
         margin: 0;
         min-height: 100%;
+        min-height: 100dvh;
       }
 
       body {
-        background:
-          radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.92 0.08 85 / 0.55), transparent 70%),
-          linear-gradient(180deg, oklch(0.985 0.006 95) 0%, var(--bg) 40%, oklch(0.955 0.012 95) 100%);
+        position: relative;
+        min-height: 100%;
+        min-height: 100dvh;
         color: var(--ink);
         -webkit-font-smoothing: antialiased;
+        background-color: var(--bg);
       }
 
-      body::before {
-        content: "";
+      .bg {
         position: fixed;
         inset: 0;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        min-width: 100vw;
+        min-height: 100dvh;
         pointer-events: none;
+        background:
+          radial-gradient(ellipse 90% 55% at 50% -8%, oklch(0.92 0.08 85 / 0.55), transparent 70%),
+          linear-gradient(180deg, oklch(0.985 0.006 95) 0%, var(--bg) 42%, oklch(0.955 0.012 95) 100%);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .bg::after {
+        content: "";
+        position: absolute;
+        inset: 0;
         opacity: 0.35;
         background-image: radial-gradient(var(--ink) 0.6px, transparent 0.6px);
         background-size: 14px 14px;
@@ -61,9 +79,53 @@
 
       .wrap {
         position: relative;
+        z-index: 1;
         width: min(100% - 2rem, var(--max));
         margin: 0 auto;
-        padding: 2.25rem 0 3.5rem;
+        padding: 1.15rem 0 3.5rem;
+      }
+
+      .topnav {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.35rem;
+        margin-bottom: 1.1rem;
+      }
+
+      .topnav a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: oklch(1 0 0 / 0.72);
+        color: var(--ink);
+        text-decoration: none;
+        transition:
+          background-color 160ms var(--ease),
+          border-color 160ms var(--ease),
+          transform 160ms var(--ease);
+      }
+
+      .topnav a:hover {
+        border-color: oklch(0.78 0.04 85);
+        background: var(--surface);
+        transform: translateY(-1px);
+      }
+
+      .topnav a:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 2px;
+      }
+
+      .topnav svg,
+      .topnav img {
+        width: 18px;
+        height: 18px;
+        display: block;
       }
 
       header {
@@ -97,6 +159,7 @@
         font-size: 0.875rem;
         line-height: 1.5;
         color: var(--ink-soft);
+        text-wrap: pretty;
       }
 
       .steps {
@@ -333,7 +396,7 @@
         display: grid;
         place-items: center;
         padding: 1.25rem;
-        margin-bottom: 1.1rem;
+        margin: 1rem 0 0.35rem;
       }
 
       .preview-box a {
@@ -522,13 +585,40 @@
     </style>
   </head>
   <body>
+    <div class="bg" aria-hidden="true"></div>
     <div class="wrap">
+      <nav class="topnav" aria-label="外部链接">
+        <a
+          href="https://github.com/Travisun/linuxdo-seal"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="GitHub 仓库"
+          aria-label="GitHub 仓库"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M12 2C6.477 2 2 6.586 2 12.253c0 4.537 2.865 8.387 6.839 9.748.5.094.682-.222.682-.482 0-.237-.009-.866-.014-1.7-2.782.618-3.369-1.38-3.369-1.38-.455-1.184-1.11-1.5-1.11-1.5-.908-.636.069-.623.069-.623 1.004.072 1.532 1.057 1.532 1.057.892 1.566 2.341 1.114 2.91.852.092-.663.35-1.114.636-1.37-2.22-.259-4.555-1.141-4.555-5.078 0-1.121.39-2.038 1.029-2.757-.103-.26-.446-1.302.098-2.714 0 0 .84-.276 2.75 1.052A9.34 9.34 0 0 1 12 6.844a9.34 9.34 0 0 1 2.504.346c1.909-1.328 2.748-1.052 2.748-1.052.546 1.412.203 2.454.1 2.714.64.719 1.028 1.636 1.028 2.757 0 3.947-2.338 4.816-4.566 5.07.359.317.679.943.679 1.901 0 1.371-.012 2.477-.012 2.813 0 .263.18.58.688.481A10.02 10.02 0 0 0 22 12.253C22 6.586 17.523 2 12 2Z"
+            />
+          </svg>
+        </a>
+        <a
+          href="https://linux.do?ref=seal-click"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="LINUX DO 社区"
+          aria-label="LINUX DO 社区"
+        >
+          <img src="/icon.svg" alt="" width="18" height="18" />
+        </a>
+      </nav>
+
       <header>
         <a class="brand" href="https://linux.do?ref=seal-click" target="_blank" rel="noopener noreferrer">
           <img src="/logo.svg" alt="LINUX DO" width="156" height="48" />
         </a>
         <h1>社区徽章引用</h1>
-        <p class="lede">三步生成嵌入代码，静态 SVG 由 CDN 缓存。</p>
+        <p class="lede">推荐将 LINUX.DO 部署在您的 GitHub README 和项目主页进行展示。</p>
       </header>
 
       <div class="steps" role="navigation" aria-label="步骤">
@@ -558,6 +648,8 @@
           </div>
           <span class="hint">高度按比例</span>
         </div>
+        <div class="label" id="preview-label" style="margin-top: 1rem">预览</div>
+        <div class="preview-box" id="preview"></div>
         <p class="note">尺寸写在 HTML 的 width / height 上，图片始终引用同一份静态 SVG。</p>
         <div class="nav">
           <button type="button" id="back-step-1">上一步</button>
@@ -566,9 +658,6 @@
       </section>
 
       <section class="panel" id="step-3" hidden aria-labelledby="code-label">
-        <div class="label" id="preview-label">预览</div>
-        <div class="preview-box" id="preview"></div>
-
         <div class="label" id="code-label">嵌入代码</div>
         <div class="tabs" role="tablist" aria-label="代码格式">
           <button type="button" class="tab" role="tab" id="tab-readme" aria-selected="true" aria-controls="code-out">
@@ -668,10 +757,8 @@
         for (const tab of stepTabs) {
           tab.setAttribute("aria-current", Number(tab.dataset.step) === step ? "step" : "false");
         }
-        if (step === 3) {
-          renderPreview();
-          renderCode();
-        }
+        if (step === 2) renderPreview();
+        if (step === 3) renderCode();
       }
 
       function renderSeals() {
@@ -693,6 +780,7 @@
           btn.addEventListener("click", () => {
             state.sealId = seal.id;
             renderSeals();
+            if (state.step === 2) renderPreview();
           });
           sealGrid.appendChild(btn);
         }
@@ -711,6 +799,7 @@
             widthInput.value = String(w);
             sizeReadout.textContent = `${w} × ${heightFor(w)}`;
             renderPresets();
+            renderPreview();
           });
           sizePresets.appendChild(chip);
         }
@@ -753,6 +842,7 @@
         state.width = next;
         sizeReadout.textContent = `${next} × ${heightFor(next)}`;
         renderPresets();
+        renderPreview();
       });
 
       widthInput.addEventListener("change", () => {
@@ -760,6 +850,7 @@
         widthInput.value = String(state.width);
         sizeReadout.textContent = `${state.width} × ${heightFor(state.width)}`;
         renderPresets();
+        renderPreview();
       });
 
       for (const tab of stepTabs) {
