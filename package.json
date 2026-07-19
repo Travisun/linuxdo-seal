@@ -6,12 +6,9 @@
   "description": "LINUX DO community seal badge embed tool",
   "scripts": {
     "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
-    "cf-typegen": "wrangler types"
+    "deploy": "wrangler deploy"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^5.20260714.1",
-    "typescript": "^5.8.3",
     "wrangler": "^4.24.0"
   }
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>LINUX DO Seal · 社区徽章</title>
-    <meta name="description" content="选择 LINUX DO 社区印章，生成可嵌入 GitHub README 与网页的徽章代码。" />
+    <meta name="description" content="三步获取 LINUX DO 社区徽章代码，嵌入 GitHub README 或网页。" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -68,7 +68,7 @@
 
       header {
         text-align: center;
-        margin-bottom: 1.75rem;
+        margin-bottom: 1.5rem;
       }
 
       .brand {
@@ -99,8 +99,52 @@
         color: var(--ink-soft);
       }
 
-      section {
-        margin-top: 1.35rem;
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.35rem;
+        margin-bottom: 1.35rem;
+        padding: 0.25rem;
+        background: oklch(0.94 0.01 95);
+        border-radius: 999px;
+      }
+
+      .step-tab {
+        appearance: none;
+        border: 0;
+        background: transparent;
+        border-radius: 999px;
+        padding: 0.55rem 0.35rem;
+        font: inherit;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--ink-soft);
+        cursor: pointer;
+        transition:
+          background-color 160ms var(--ease),
+          color 160ms var(--ease),
+          box-shadow 160ms var(--ease);
+      }
+
+      .step-tab[aria-current="step"] {
+        background: var(--surface);
+        color: var(--ink);
+        box-shadow: 0 1px 2px oklch(0.3 0.02 95 / 0.08);
+      }
+
+      .step-tab:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 2px;
+      }
+
+      .step-tab .n {
+        display: inline-block;
+        min-width: 1.1em;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .panel[hidden] {
+        display: none;
       }
 
       .label {
@@ -138,8 +182,7 @@
         font: inherit;
         transition:
           border-color 180ms var(--ease),
-          background-color 180ms var(--ease),
-          transform 180ms var(--ease);
+          background-color 180ms var(--ease);
       }
 
       .seal-option:hover {
@@ -176,43 +219,6 @@
         width: 92px;
         height: 28px;
         object-fit: contain;
-        display: block;
-      }
-
-      .preview-box {
-        border: 1px solid var(--line);
-        background:
-          linear-gradient(45deg, oklch(0.94 0.005 95) 25%, transparent 25%),
-          linear-gradient(-45deg, oklch(0.94 0.005 95) 25%, transparent 25%),
-          linear-gradient(45deg, transparent 75%, oklch(0.94 0.005 95) 75%),
-          linear-gradient(-45deg, transparent 75%, oklch(0.94 0.005 95) 75%);
-        background-size: 16px 16px;
-        background-position:
-          0 0,
-          0 8px,
-          8px -8px,
-          -8px 0;
-        background-color: var(--surface);
-        border-radius: var(--radius);
-        min-height: 112px;
-        display: grid;
-        place-items: center;
-        padding: 1.25rem;
-      }
-
-      .preview-box a {
-        display: inline-flex;
-        line-height: 0;
-        transition: transform 200ms var(--ease);
-      }
-
-      .preview-box a:hover {
-        transform: translateY(-1px);
-      }
-
-      .preview-box img {
-        max-width: 100%;
-        height: auto;
         display: block;
       }
 
@@ -299,6 +305,51 @@
         font-size: 0.75rem;
         color: var(--ink-soft);
         white-space: nowrap;
+      }
+
+      .note {
+        margin: 0.85rem 0 0;
+        font-size: 0.75rem;
+        line-height: 1.45;
+        color: var(--ink-soft);
+      }
+
+      .preview-box {
+        border: 1px solid var(--line);
+        background:
+          linear-gradient(45deg, oklch(0.94 0.005 95) 25%, transparent 25%),
+          linear-gradient(-45deg, oklch(0.94 0.005 95) 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, oklch(0.94 0.005 95) 75%),
+          linear-gradient(-45deg, transparent 75%, oklch(0.94 0.005 95) 75%);
+        background-size: 16px 16px;
+        background-position:
+          0 0,
+          0 8px,
+          8px -8px,
+          -8px 0;
+        background-color: var(--surface);
+        border-radius: var(--radius);
+        min-height: 112px;
+        display: grid;
+        place-items: center;
+        padding: 1.25rem;
+        margin-bottom: 1.1rem;
+      }
+
+      .preview-box a {
+        display: inline-flex;
+        line-height: 0;
+        transition: transform 200ms var(--ease);
+      }
+
+      .preview-box a:hover {
+        transform: translateY(-1px);
+      }
+
+      .preview-box img {
+        max-width: 100%;
+        height: auto;
+        display: block;
       }
 
       .tabs {
@@ -398,6 +449,55 @@
         background: #fff;
       }
 
+      .nav {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1.15rem;
+      }
+
+      .nav button {
+        flex: 1;
+        appearance: none;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        border-radius: var(--radius);
+        padding: 0.7rem 0.85rem;
+        font: inherit;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        color: var(--ink);
+        transition:
+          background-color 160ms var(--ease),
+          border-color 160ms var(--ease),
+          color 160ms var(--ease);
+      }
+
+      .nav button.primary {
+        border-color: var(--ink);
+        background: var(--ink);
+        color: #fff;
+      }
+
+      .nav button:hover {
+        border-color: oklch(0.75 0.05 85);
+      }
+
+      .nav button.primary:hover {
+        filter: brightness(1.08);
+        border-color: var(--ink);
+      }
+
+      .nav button:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 2px;
+      }
+
+      .nav button:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+
       footer {
         margin-top: 1.75rem;
         text-align: center;
@@ -428,15 +528,24 @@
           <img src="/logo.svg" alt="LINUX DO" width="156" height="48" />
         </a>
         <h1>社区徽章引用</h1>
-        <p class="lede">选择印章与尺寸，复制代码嵌入 README 或网页。</p>
+        <p class="lede">三步生成嵌入代码，静态 SVG 由 CDN 缓存。</p>
       </header>
 
-      <section aria-labelledby="seal-label">
-        <div class="label" id="seal-label">印章类型</div>
+      <div class="steps" role="navigation" aria-label="步骤">
+        <button type="button" class="step-tab" data-step="1" aria-current="step"><span class="n">1</span> 选印章</button>
+        <button type="button" class="step-tab" data-step="2"><span class="n">2</span> 选尺寸</button>
+        <button type="button" class="step-tab" data-step="3"><span class="n">3</span> 复制代码</button>
+      </div>
+
+      <section class="panel" id="step-1" aria-labelledby="seal-label">
+        <div class="label" id="seal-label">选择印章</div>
         <div class="seal-grid" id="seal-grid" role="radiogroup" aria-labelledby="seal-label"></div>
+        <div class="nav">
+          <button type="button" class="primary" id="to-step-2">下一步：尺寸</button>
+        </div>
       </section>
 
-      <section aria-labelledby="size-label">
+      <section class="panel" id="step-2" hidden aria-labelledby="size-label">
         <div class="label" id="size-label">
           <span>展示尺寸</span>
           <span id="size-readout">180 × 55</span>
@@ -449,29 +558,37 @@
           </div>
           <span class="hint">高度按比例</span>
         </div>
+        <p class="note">尺寸写在 HTML 的 width / height 上，图片始终引用同一份静态 SVG。</p>
+        <div class="nav">
+          <button type="button" id="back-step-1">上一步</button>
+          <button type="button" class="primary" id="to-step-3">下一步：复制</button>
+        </div>
       </section>
 
-      <section aria-labelledby="preview-label">
+      <section class="panel" id="step-3" hidden aria-labelledby="code-label">
         <div class="label" id="preview-label">预览</div>
         <div class="preview-box" id="preview"></div>
-      </section>
 
-      <section aria-labelledby="code-label">
         <div class="label" id="code-label">嵌入代码</div>
         <div class="tabs" role="tablist" aria-label="代码格式">
-          <button type="button" class="tab" role="tab" id="tab-md" aria-selected="true" aria-controls="code-out">
-            Markdown
+          <button type="button" class="tab" role="tab" id="tab-readme" aria-selected="true" aria-controls="code-out">
+            README
           </button>
           <button type="button" class="tab" role="tab" id="tab-html" aria-selected="false" aria-controls="code-out">
             HTML
           </button>
         </div>
         <div class="code-panel">
-          <label class="visually-hidden" for="code-out" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">
+          <label for="code-out" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">
             嵌入代码
           </label>
           <textarea id="code-out" readonly spellcheck="false"></textarea>
           <button type="button" class="copy-btn" id="copy-btn">复制</button>
+        </div>
+        <p class="note">README 使用 HTML 片段以控制尺寸（GitHub 支持）。图片为静态资源，可被 CDN 长期缓存。</p>
+        <div class="nav">
+          <button type="button" id="back-step-2">上一步</button>
+          <button type="button" class="primary" id="copy-again">复制代码</button>
         </div>
       </section>
 
@@ -501,9 +618,10 @@
       ];
 
       const state = {
+        step: 1,
         sealId: "powered-by",
         width: 180,
-        format: "md",
+        format: "readme",
       };
 
       const sealGrid = document.getElementById("seal-grid");
@@ -513,8 +631,9 @@
       const preview = document.getElementById("preview");
       const codeOut = document.getElementById("code-out");
       const copyBtn = document.getElementById("copy-btn");
-      const tabMd = document.getElementById("tab-md");
+      const tabReadme = document.getElementById("tab-readme");
       const tabHtml = document.getElementById("tab-html");
+      const stepTabs = [...document.querySelectorAll(".step-tab")];
 
       function heightFor(width) {
         return Math.max(1, Math.round((width * NATIVE_H) / NATIVE_W));
@@ -529,22 +648,30 @@
         return SEALS.find((s) => s.id === state.sealId) || SEALS[0];
       }
 
-      function badgeUrl(absolute) {
-        const path = `/badge/${state.sealId}.svg?w=${state.width}`;
+      function sealSrc(absolute) {
+        const path = `/seals/seal-${state.sealId}.svg`;
         return absolute ? new URL(path, location.origin).href : path;
       }
 
-      function markdownCode() {
+      function embedCode() {
         const seal = currentSeal();
-        const src = badgeUrl(true);
-        return `[![${seal.title}](${src})](${LINK})`;
-      }
-
-      function htmlCode() {
-        const seal = currentSeal();
-        const src = badgeUrl(true);
+        const src = sealSrc(true);
         const h = heightFor(state.width);
         return `<a href="${LINK}" target="_blank" rel="noopener noreferrer" title="${seal.title}">\n  <img src="${src}" alt="${seal.title}" width="${state.width}" height="${h}" />\n</a>`;
+      }
+
+      function setStep(step) {
+        state.step = step;
+        for (const el of document.querySelectorAll(".panel")) {
+          el.hidden = el.id !== `step-${step}`;
+        }
+        for (const tab of stepTabs) {
+          tab.setAttribute("aria-current", Number(tab.dataset.step) === step ? "step" : "false");
+        }
+        if (step === 3) {
+          renderPreview();
+          renderCode();
+        }
       }
 
       function renderSeals() {
@@ -565,7 +692,7 @@
           `;
           btn.addEventListener("click", () => {
             state.sealId = seal.id;
-            render();
+            renderSeals();
           });
           sealGrid.appendChild(btn);
         }
@@ -582,7 +709,8 @@
           chip.addEventListener("click", () => {
             state.width = w;
             widthInput.value = String(w);
-            render();
+            sizeReadout.textContent = `${w} × ${heightFor(w)}`;
+            renderPresets();
           });
           sizePresets.appendChild(chip);
         }
@@ -590,57 +718,22 @@
 
       function renderPreview() {
         const seal = currentSeal();
-        const src = badgeUrl(false);
         const h = heightFor(state.width);
         preview.innerHTML = `
           <a href="${LINK}" target="_blank" rel="noopener noreferrer" title="${seal.title}">
-            <img src="${src}" alt="${seal.title}" width="${state.width}" height="${h}" />
+            <img src="${sealSrc(false)}" alt="${seal.title}" width="${state.width}" height="${h}" />
           </a>
         `;
       }
 
       function renderCode() {
-        codeOut.value = state.format === "html" ? htmlCode() : markdownCode();
-        tabMd.setAttribute("aria-selected", String(state.format === "md"));
+        codeOut.value = embedCode();
+        tabReadme.setAttribute("aria-selected", String(state.format === "readme"));
         tabHtml.setAttribute("aria-selected", String(state.format === "html"));
       }
 
-      function render() {
-        state.width = clampWidth(state.width);
-        widthInput.value = String(state.width);
-        sizeReadout.textContent = `${state.width} × ${heightFor(state.width)}`;
-        renderSeals();
-        renderPresets();
-        renderPreview();
-        renderCode();
-      }
-
-      widthInput.addEventListener("input", () => {
-        const next = clampWidth(Number(widthInput.value));
-        state.width = next;
-        sizeReadout.textContent = `${next} × ${heightFor(next)}`;
-        renderPresets();
-        renderPreview();
-        renderCode();
-      });
-
-      widthInput.addEventListener("change", () => {
-        state.width = clampWidth(Number(widthInput.value));
-        render();
-      });
-
-      tabMd.addEventListener("click", () => {
-        state.format = "md";
-        renderCode();
-      });
-
-      tabHtml.addEventListener("click", () => {
-        state.format = "html";
-        renderCode();
-      });
-
-      copyBtn.addEventListener("click", async () => {
-        const text = codeOut.value;
+      async function copyCode() {
+        const text = codeOut.value || embedCode();
         try {
           await navigator.clipboard.writeText(text);
         } catch {
@@ -653,9 +746,45 @@
           copyBtn.dataset.copied = "false";
           copyBtn.textContent = "复制";
         }, 1400);
+      }
+
+      widthInput.addEventListener("input", () => {
+        const next = clampWidth(Number(widthInput.value));
+        state.width = next;
+        sizeReadout.textContent = `${next} × ${heightFor(next)}`;
+        renderPresets();
       });
 
-      render();
+      widthInput.addEventListener("change", () => {
+        state.width = clampWidth(Number(widthInput.value));
+        widthInput.value = String(state.width);
+        sizeReadout.textContent = `${state.width} × ${heightFor(state.width)}`;
+        renderPresets();
+      });
+
+      for (const tab of stepTabs) {
+        tab.addEventListener("click", () => setStep(Number(tab.dataset.step)));
+      }
+
+      document.getElementById("to-step-2").addEventListener("click", () => setStep(2));
+      document.getElementById("to-step-3").addEventListener("click", () => setStep(3));
+      document.getElementById("back-step-1").addEventListener("click", () => setStep(1));
+      document.getElementById("back-step-2").addEventListener("click", () => setStep(2));
+      document.getElementById("copy-again").addEventListener("click", copyCode);
+      copyBtn.addEventListener("click", copyCode);
+
+      tabReadme.addEventListener("click", () => {
+        state.format = "readme";
+        renderCode();
+      });
+      tabHtml.addEventListener("click", () => {
+        state.format = "html";
+        renderCode();
+      });
+
+      renderSeals();
+      renderPresets();
+      setStep(1);
     </script>
   </body>
 </html>
