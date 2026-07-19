@@ -1,5 +1,9 @@
 # LINUX DO Seal
 
+<a href="https://linux.do?ref=seal-click" target="_blank" rel="noopener noreferrer" title="Best Community · LINUX DO">
+  <img src="https://linuxdo-seal.cuishushu.com/seals/seal-best-community.svg" alt="Best Community · LINUX DO" width="120" height="37" />
+</a>
+
 基于 Cloudflare Worker Static Assets 的窄版社区徽章引用工具。选择一个徽章并将代码部署在您的 GitHub README 和项目主页中。
 
 **在线地址：** [https://linuxdo-seal.cuishushu.com](https://linuxdo-seal.cuishushu.com)
